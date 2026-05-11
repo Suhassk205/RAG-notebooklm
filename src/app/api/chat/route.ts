@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getGeminiClient } from '@/lib/gemini';
 import { getPineconeIndex } from '@/lib/pinecone';
 
+export const maxDuration = 60;
+
 export async function POST(req: NextRequest) {
   try {
     const { messages } = await req.json();

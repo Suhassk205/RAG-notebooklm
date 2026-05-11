@@ -3,6 +3,9 @@ import { getGeminiClient } from '@/lib/gemini';
 import { getPineconeIndex } from '@/lib/pinecone';
 import { splitText } from '@/lib/text-splitter';
 import crypto from 'crypto';
+import PDFParser from 'pdf2json';
+
+export const maxDuration = 60;
 
 export async function POST(req: NextRequest) {
   try {
@@ -17,8 +20,7 @@ export async function POST(req: NextRequest) {
     if (file) {
       if (file.type === 'application/pdf' || file.name.endsWith('.pdf')) {
         const buffer = await file.arrayBuffer();
-        const PDFParser = require('pdf2json');
-        const pdfParser = new PDFParser(null, 1);
+        const pdfParser = new (PDFParser as any)(null, 1);
         textData = await new Promise((resolve, reject) => {
           pdfParser.on("pdfParser_dataError", (errData: any) => reject(errData.parserError));
           pdfParser.on("pdfParser_dataReady", () => {
