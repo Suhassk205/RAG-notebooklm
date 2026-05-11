@@ -36,11 +36,11 @@ export async function POST(req: NextRequest) {
     });
 
     const contextText = queryResult.matches
-      .map(match => match.metadata?.text)
+      .map(match => `Document: ${match.metadata?.filename || 'Uploaded Document'}\nContent: ${match.metadata?.text}`)
       .filter(text => text)
       .join('\n\n---\n\n');
 
-    const systemInstruction = `You are a helpful AI assistant. Use the following pieces of retrieved context to answer the question. If you don't know the answer, just say that you don't know. Keep the answer concise and relevant.
+    const systemInstruction = `You are a helpful AI assistant. Use the following pieces of retrieved context to answer the question. If you don't know the answer, just say that you don't know. Keep the answer concise and relevant. Always explicitly mention the name of the Document you used to find the answer.
 
 Context:
 ${contextText}`;

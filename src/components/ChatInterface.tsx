@@ -175,15 +175,7 @@ export function ChatInterface() {
                           </ReactMarkdown>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2 px-1">
-                        <Badge
-                          variant="outline"
-                          className="text-xs hover:bg-primary/10 cursor-pointer transition-colors"
-                        >
-                          <FileText className="w-3 h-3 mr-1" />
-                          📄 AI_Research_Paper.pdf (Chunk 3)
-                        </Badge>
-                      </div>
+
                     </div>
                   ) : (
                     <div className="px-4 py-2 rounded-2xl rounded-bl-sm bg-primary/15">
